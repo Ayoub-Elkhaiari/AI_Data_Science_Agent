@@ -20,9 +20,9 @@
 
 </div>
 
-A **production-style microservice platform** for automated data science workflows. Upload a CSV or Excel file and the platform profiles your data quality, generates a deterministic cleaning plan, creates visualizations, provides ML model recommendations, and exports a full HTML/PDF report — all in one pipeline.
+A **production-style microservice platform** for automated data science workflows. Upload a CSV or Excel file and the platform profiles your data quality, generates a deterministic cleaning plan, creates visualizations, provides ML model recommendations, and exports a full HTML/PDF report and cleaned csv all in one pipeline.
 
-The LLM **plans and explains**. Deterministic Python services **perform the actual data operations** — ensuring safety, reproducibility, and auditability.
+The LLM **plans and explains**. Deterministic Python services **perform the actual data operations** ensuring safety, reproducibility, and auditability.
 
 ---
 
@@ -30,17 +30,18 @@ The LLM **plans and explains**. Deterministic Python services **perform the actu
 
 Most data science pipelines are either fully manual or rely blindly on LLMs to manipulate data. This platform takes a different approach:
 
-- 🧠 **LLM as a planner only** — OpenRouter generates structured JSON recommendations, never touches the data
-- 🔒 **Allow-listed cleaning actions** — the cleaning service only executes safe, pre-approved deterministic operations
-- 📊 **End-to-end automation** — from raw upload to downloadable clean CSV and PDF report in seconds
-- 🐳 **One-command deployment** — all services spin up via Docker Compose
+- 🧠 **LLM as a planner only**: OpenRouter generates structured JSON recommendations, never touches the data
+- 🔒 **Allow-listed cleaning actions**: the cleaning service only executes safe, pre-approved deterministic operations
+- 📊 **End-to-end automation**: from raw upload to downloadable clean CSV and PDF report in seconds
+- 🐳 **One-command deployment**: all services spin up via Docker Compose
 
 ---
 
 ## 🖥️ Dashboard
 
-<!-- Replace with your actual screenshots -->
-> Upload a file → get a full analysis in seconds
+<img width="1716" height="8212" alt="For_Stroke" src="https://github.com/user-attachments/assets/48d7d921-9af4-498d-9659-0e36c66b5634" />
+
+<img width="1716" height="8542" alt="For_Titanic" src="https://github.com/user-attachments/assets/6a98d6fc-64f1-49fb-a983-0440f8f76724" />
 
 The dashboard provides:
 
@@ -105,7 +106,7 @@ User uploads CSV/XLSX
 ### Security Model
 
 - API keys remain server-side in `.env`, never exposed to the frontend
-- LLM returns **structured JSON only** — it never writes or modifies data
+- LLM returns **structured JSON only**, it never writes or modifies data
 - Cleaning service enforces an **allow-list** of safe actions:
   `drop_duplicates`, `fill_missing_mean/median/mode`, `remove_outliers_iqr`, `drop_column`, `rename_column`, `convert_type`
 - File extensions validated at upload (`.csv` and `.xlsx` only)
@@ -121,12 +122,12 @@ User uploads CSV/XLSX
 |---------|------|----------------|
 | `apps/web` | 3000 | Next.js 15 dashboard (TypeScript + Tailwind) |
 | `apps/api-gateway` | 8000 | Upload, orchestration, status, report, download |
-| `services/planner-service` | — | OpenRouter LLM plan generation with fallback |
-| `services/profiling-service` | — | Deterministic dataset profiling |
-| `services/cleaning-service` | — | Allow-listed safe cleaning operations |
-| `services/visualization-service` | — | Chart generation (matplotlib + seaborn) |
-| `services/ml-advisor-service` | — | Task detection and model recommendations |
-| `services/report-service` | — | HTML + PDF report generation |
+| `services/planner-service` | - | OpenRouter LLM plan generation with fallback |
+| `services/profiling-service` | - | Deterministic dataset profiling |
+| `services/cleaning-service` | - | Allow-listed safe cleaning operations |
+| `services/visualization-service` | - | Chart generation (matplotlib + seaborn) |
+| `services/ml-advisor-service` | - | Task detection and model recommendations |
+| `services/report-service` | - | HTML + PDF report generation |
 
 ### Tech Stack
 
@@ -153,17 +154,16 @@ User uploads CSV/XLSX
 ### Prerequisites
 
 - Docker & Docker Compose installed
-- (Optional) OpenRouter API key for LLM-powered planning
+- OpenRouter API key for LLM-powered planning
 
 ### 1. Clone and configure
 
 ```bash
 git clone https://github.com/Ayoub-Elkhaiari/AI_Data_Science_Agent.git
 cd AI_Data_Science_Agent
-cp .env.example .env
 ```
 
-Edit `.env` and add your OpenRouter API key (optional — the platform works without it using the deterministic fallback):
+Edit `.env` and add your OpenRouter API key (optional: the platform works without it using the deterministic fallback):
 
 ```env
 OPENROUTER_API_KEY=your_key_here
@@ -174,6 +174,7 @@ CORS_ORIGINS=http://localhost:3000
 ### 2. Run
 
 ```bash
+docker compose build
 docker compose up
 ```
 
@@ -237,18 +238,18 @@ AI_Data_Science_Agent/
 
 Most production ML workflows suffer from one of two failure modes: too manual (an analyst runs everything by hand) or too risky (an LLM modifies the data directly with no guardrails).
 
-This platform demonstrates a third path — using LLMs strictly as reasoning engines while keeping data operations in deterministic, auditable Python services. The result is a system that is:
+This platform demonstrates a third path using LLMs strictly as reasoning engines while keeping data operations in deterministic, auditable Python services. The result is a system that is:
 
-- ✅ **Safe** — LLMs never touch the data
-- ✅ **Reproducible** — same input always produces the same cleaning output
-- ✅ **Explainable** — every action is logged in a lineage trail
-- ✅ **Scalable** — each service deploys and scales independently
+- ✅ **Safe**: LLMs never touch the data
+- ✅ **Reproducible**: same input always produces the same cleaning output
+- ✅ **Explainable**: every action is logged in a lineage trail
+- ✅ **Scalable**: each service deploys and scales independently
 
 ---
 
 ## 👤 Author
 
 **Ayoub El Khaiari**
-MSc in Advanced Machine Learning & Multimedia Intelligence
+AI Research Engineer
 
 [![GitHub](https://img.shields.io/badge/GitHub-Ayoub--Elkhaiari-181717?logo=github&logoColor=white)](https://github.com/Ayoub-Elkhaiari)
